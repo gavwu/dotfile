@@ -93,3 +93,11 @@ let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_diagnostic_errors = 1
+let g:go_highlight_diagnostic_warnings = 1
+let g:go_highlight_diagnostic_warnings = 1
+let g:go_diagnostics_level = 2
+
+" go keybinding
+"
+" auto focus on the pop window
+nmap gi :GoImplements<CR><C-W>j
