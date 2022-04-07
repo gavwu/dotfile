@@ -15,3 +15,12 @@ ln -s ~/dotfile/vim ~/.vim
 
 NOTE: for generating help tag for plugin, need to run `helptags ALL` in vim command mode
 
+## coc.nvim
+
+```
+node --version
+v14.17.0
+```
+
+NOTE: might need to do `yarn install`
+
