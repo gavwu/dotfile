@@ -50,6 +50,9 @@ set hidden
 set ignorecase
 set smartcase
 
+set splitright
+set splitbelow
+
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
 
@@ -98,9 +101,27 @@ let g:go_highlight_diagnostic_warnings = 1
 let g:go_diagnostics_level = 2
 " disable GoDef mapping provided by vim-go (use coc-definition instead)
 let g:go_def_mapping_enabled = 0
+" disable GoDoc mapping provided by vim-go (use coc-definition instead)
+let g:go_doc_keywordprg_enabled = 0
 
-" go keybinding
-"
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+\ }
+" let g:go_debug_mappings = {
+"     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
+"     \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
+"     \ '(go-debug-step)': {'key': 's'},
+"   \}
+" let g:go_debug_mappings = {
+" 	\ '(go-debug-continue)':   {'key': '<F5>'},
+" 	\ '(go-debug-print)':      {'key': '<F6>'},
+" 	\ '(go-debug-breakpoint)': {'key': '<F9>'},
+" 	\ '(go-debug-next)':       {'key': '<F10>'},
+" 	\ '(go-debug-step)':       {'key': '<F11>'},
+" 	\ '(go-debug-halt)':       {'key': '<F8>'},
+" 	\ }
+" 
 " key mapping
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
@@ -142,6 +163,52 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
+
+" NERDTree key mapping
+nnoremap <F2> :NERDTreeToggle<CR>
+
+" locate current file
+nnoremap <Leader>f :NERDTreeFind<CR>
+
+" highlight color setting
+hi FgCocErrorFloatBgCocFloating ctermfg=0
+hi Pmenu ctermfg=0 ctermbg=7
+" 
+
+" fzf
+set rtp+=~/.fzf
+
+" yarn also copy to clipboard
+set clipboard=unnamed
+
+" CtrlSF setting
+nmap     <C-F> <Plug>CtrlSFPrompt
+vmap     <C-F> <Plug>CtrlSFVwordPath
+nnoremap <F4> :CtrlSFToggle<CR>
+
+let g:ctrlsf_backend = 'ag'
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_auto_focus = {
+	\ "at" : "start",
+	\ "duration_less_than": 1000
+	\ }
+let g:ctrlsf_search_mode = 'async'
+
+" toggle code fold (za, zf for visula model) perhap set a key mapping later
+set foldmethod=manual
+
+" search selected word in visual mode(perhap wanna use someday)
+" vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" open a new terminal in vim
+nmap <Leader>t :vert term<CR>
