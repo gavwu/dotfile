@@ -28,3 +28,6 @@
 [submodule "vim/pack/vendor/start/vim-airline"]
 	path = vim/pack/vendor/start/vim-airline
 	url = https://github.com/bling/vim-airline
+[submodule "vim/pack/vendor/start/spelunker.vim"]
+	path = vim/pack/vendor/start/spelunker.vim
+	url = https://github.com/kamykn/spelunker.vim.git

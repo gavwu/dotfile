@@ -66,6 +66,9 @@ set noerrorbells visualbell t_vb=
 " sometimes be convenient.
 set mouse+=a
 
+" set highlight search
+set hlsearch
+
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys
 " for movement, rather than using more efficient movement commands, is also a
@@ -107,6 +110,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_debug_windows = {
       \ 'vars':       'rightbelow 60vnew',
       \ 'stack':      'rightbelow 10new',
+      \ 'out':      'rightbelow 10new',
 \ }
 " let g:go_debug_mappings = {
 "     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
@@ -183,7 +187,8 @@ nnoremap <Leader>f :NERDTreeFind<CR>
 " highlight color setting
 hi FgCocErrorFloatBgCocFloating ctermfg=0
 hi Pmenu ctermfg=0 ctermbg=7
-" 
+hi link goDiagnosticWarning CursorLineNr
+hi TODO ctermbg=6
 
 " fzf
 set rtp+=~/.fzf
