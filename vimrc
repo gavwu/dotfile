@@ -28,6 +28,9 @@ set number
 " down.
 set relativenumber
 
+" code look pretty withous wrap
+set nowrap
+
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
 
@@ -189,16 +192,15 @@ hi FgCocErrorFloatBgCocFloating ctermfg=0
 hi Pmenu ctermfg=0 ctermbg=7
 hi link goDiagnosticWarning CursorLineNr
 hi TODO ctermbg=6
-
-" fzf
-set rtp+=~/.fzf
+hi DiffText ctermbg=grey
+hi DiffChange ctermbg=grey
 
 " yarn also copy to clipboard
 set clipboard=unnamed
 
 " CtrlSF setting
-nmap     <C-F> <Plug>CtrlSFPrompt
-vmap     <C-F> <Plug>CtrlSFVwordPath
+nmap <C-F> <Plug>CtrlSFPrompt
+vmap <C-F> <Plug>CtrlSFVwordPath
 nnoremap <F4> :CtrlSFToggle<CR>
 
 let g:ctrlsf_backend = 'ag'
@@ -213,7 +215,10 @@ let g:ctrlsf_search_mode = 'async'
 set foldmethod=manual
 
 " search selected word in visual mode(perhap wanna use someday)
-" vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " open a new terminal in vim
-nmap <Leader>t :vert term<CR>
+nnoremap <Leader>t :vert term<CR>
+
+" Uppercase in Insert Mode
+inoremap <C-u> <Esc>viwUwi
