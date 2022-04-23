@@ -5,11 +5,13 @@
     "languageserver": {
         "golang": {
             "command": "gopls",
+	    "args":["-remote=auto"],
             "filetypes": [
                 "go"
             ],
             "rootPatterns": [
-                "go.mod"
+                "go.mod",
+		".git/"
             ]
         }
     }

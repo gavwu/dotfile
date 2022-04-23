@@ -103,12 +103,18 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
-let g:go_highlight_diagnostic_warnings = 1
 let g:go_diagnostics_level = 2
 " disable GoDef mapping provided by vim-go (use coc-definition instead)
 let g:go_def_mapping_enabled = 0
 " disable GoDoc mapping provided by vim-go (use coc-definition instead)
 let g:go_doc_keywordprg_enabled = 0
+" use coc.nvim for code completion instead
+let g:go_code_completion_enabled = 0
+let g:go_textobj_enabled = 0
+let g:go_textobj_include_function_doc = 0
+let g:go_textobj_include_variable = 0
+" disable vim-go gopls, use coc.nvim + gopls
+let g:go_gopls_enabled = 1
 
 let g:go_debug_windows = {
       \ 'vars':       'rightbelow 60vnew',
@@ -135,7 +141,7 @@ nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nmap <silent> <F8> :%!python -m json.tool<CR>
+nnoremap <silent> <F8> :%!python -m json.tool<CR>
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
@@ -222,3 +228,6 @@ nnoremap <Leader>t :vert term<CR>
 
 " Uppercase in Insert Mode
 inoremap <C-u> <Esc>viwUwi
+
+" set runtimepath-=~/.vim/pack/vendor/start/vim-go
+let g:go_debug=['lsp','shell-commands','debugger-state']
