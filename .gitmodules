@@ -28,3 +28,12 @@
 [submodule "vim/pack/vendor/start/git-messenger.vim"]
 	path = vim/pack/vendor/start/git-messenger.vim
 	url = https://github.com/rhysd/git-messenger.vim.git
+[submodule "vim/pack/vendor/start/vim-go"]
+	path = vim/pack/vendor/start/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "vim/pack/vendor/start/markdown-preview.nvim"]
+	path = vim/pack/vendor/start/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim.git
+[submodule "vim/pack/vendor/start/tagbar"]
+	path = vim/pack/vendor/start/tagbar
+	url = https://github.com/preservim/tagbar.git

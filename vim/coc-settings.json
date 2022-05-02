@@ -12,7 +12,11 @@
             "rootPatterns": [
                 "go.mod",
 		".git/"
-            ]
+            ],
+	    "initializationOptions":{
+		    "experimentalWorkspaceModule":true
+	    },
+	    "trace.server":"verbose"
         }
     }
 }

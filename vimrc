@@ -28,7 +28,7 @@ set number
 " down.
 set relativenumber
 
-" code look pretty withous wrap
+" code look pretty without wrap
 set nowrap
 
 " Always show the status line at the bottom, even if you only have one window open.
@@ -88,6 +88,15 @@ inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+" use jk to exit insert mode
+" inoremap jk <Esc>
+" inoremap <ESC> :echoe "Use jk"<CR>
+
+" that operates on a function name in the current line
+" onoremap <silent> F :<C-U>normal! 0f(hviw<CR>
+
 filetype plugin indent on
 
 " window movement
@@ -96,36 +105,49 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" vim-go
+""""""""""""""""""""""""""""""""""""vim-go""""""""""""""""""""""""""""""""""""
 let g:go_highlight_functions = 1
 let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_format_strings = 1
+
+" diagnostic is disabled while g:go_gopls_enabled = 0
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
 let g:go_diagnostics_level = 2
+
 " disable GoDef mapping provided by vim-go (use coc-definition instead)
 let g:go_def_mapping_enabled = 0
 " disable GoDoc mapping provided by vim-go (use coc-definition instead)
 let g:go_doc_keywordprg_enabled = 0
 " use coc.nvim for code completion instead
 let g:go_code_completion_enabled = 0
+
+" don't know what it is
 let g:go_textobj_enabled = 0
 let g:go_textobj_include_function_doc = 0
 let g:go_textobj_include_variable = 0
+
 " disable vim-go gopls, use coc.nvim + gopls
-let g:go_gopls_enabled = 1
+let g:go_gopls_enabled = 0
 
 let g:go_debug_windows = {
       \ 'vars':       'rightbelow 60vnew',
       \ 'stack':      'rightbelow 10new',
       \ 'out':      'rightbelow 10new',
 \ }
-" let g:go_debug_mappings = {
-"     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
-"     \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
-"     \ '(go-debug-step)': {'key': 's'},
-"   \}
+ let g:go_debug_mappings = {
+     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
+     \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
+     \ '(go-debug-step)': {'key': 's'},
+   \}
+augroup go_mapping
+	autocmd!
+	autocmd FileType go nnoremap <buffer> <Leader>b :GoDebugBreakpoint<CR>
+	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
+augroup END
+
+
 " let g:go_debug_mappings = {
 " 	\ '(go-debug-continue)':   {'key': '<F5>'},
 " 	\ '(go-debug-print)':      {'key': '<F6>'},
@@ -135,11 +157,7 @@ let g:go_debug_windows = {
 " 	\ '(go-debug-halt)':       {'key': '<F8>'},
 " 	\ }
 " 
-" key mapping
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <silent> <F8> :%!python -m json.tool<CR>
 
@@ -147,6 +165,11 @@ nnoremap <silent> <F8> :%!python -m json.tool<CR>
 let g:vim_markdown_folding_disabled = 1
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
+" key mapping
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -213,9 +236,29 @@ let g:ctrlsf_backend = 'ag'
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_auto_focus = {
 	\ "at" : "start",
-	\ "duration_less_than": 1000
 	\ }
 let g:ctrlsf_search_mode = 'async'
+let g:ctrlsf_ignore_dir = ['.git']
+let g:ctrlsf_regex_pattern = 1
+let g:ctrlsf_mapping = {
+		\ "open"    : ["<CR>", "o"],
+		\ "openb"   : "O",
+		\ "split"   : "<C-S>",
+		\ "vsplit"  : "<C-V>",
+		\ "tab"     : "",
+		\ "tabb"    : "",
+		\ "popen"   : "p",
+		\ "popenf"  : "P",
+		\ "quit"    : "q",
+		\ "next"    : "n",
+		\ "prev"    : "N",
+		\ "nfile"   : "f",
+		\ "pfile"   : "F",
+		\ "pquit"   : "q",
+		\ "loclist" : "",
+		\ "chgmode" : "M",
+		\ "stop"    : "<C-C>",
+		\ }
 
 " toggle code fold (za, zf for visula model) perhap set a key mapping later
 set foldmethod=manual
@@ -224,10 +267,10 @@ set foldmethod=manual
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " open a new terminal in vim
-nnoremap <Leader>t :vert term<CR>
+nnoremap <Leader>t :bo term<CR>
 
 " Uppercase in Insert Mode
 inoremap <C-u> <Esc>viwUwi
 
-" set runtimepath-=~/.vim/pack/vendor/start/vim-go
-let g:go_debug=['lsp','shell-commands','debugger-state']
+nnoremap <silent> <F3> :TagbarToggle<CR>
+nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
