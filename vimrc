@@ -274,3 +274,6 @@ inoremap <C-u> <Esc>viwUwi
 
 nnoremap <silent> <F3> :TagbarToggle<CR>
 nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
+
+nmap <leader>rn <Plug>(coc-rename)
+let g:mkdp_refresh_slow = 1
