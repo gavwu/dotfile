@@ -133,6 +133,7 @@ user=gavwu
 
 # vim mode config
 bindkey -v
+export MYVIMRC="$HOME/.vimrc"
 
 # Change cursor shape for different vi modes.
 # function zle-keymap-select {
