@@ -14,7 +14,6 @@
 		".git/"
             ],
 	    "initializationOptions":{
-		    "experimentalWorkspaceModule":true
 	    },
 	    "trace.server":"verbose"
         }

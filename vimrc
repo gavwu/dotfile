@@ -1,3 +1,4 @@
+""""""""""""""""""""""""""""""[Baisc Setting]""""""""""""""""""""""""""""""
 " Comments in Vimscript start with a `"`.
 
 " If you open this file in Vim, it'll be syntax highlighted for you.
@@ -59,9 +60,6 @@ set splitbelow
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
 
-" Unbind some useless/annoying default key bindings.
-nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
-
 " Disable audible bell because it's annoying.
 set noerrorbells visualbell t_vb=
 
@@ -72,38 +70,97 @@ set mouse+=a
 " set highlight search
 set hlsearch
 
+filetype plugin indent on
+
+" yarn also copy to clipboard
+set clipboard=unnamed
+""""""""""""""""""""""""""""""[Basic Setting End]""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""[Key Mapping]""""""""""""""""""""""""""""""
+" Unbind some useless/annoying default key bindings.
+nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
+
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys
 " for movement, rather than using more efficient movement commands, is also a
 " bad habit. The former is enforceable through a .vimrc, while we don't know
 " how to prevent the latter.
 " Do this in normal mode...
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
+nnoremap <Left>  <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up>    <Nop>
+nnoremap <Down>  <Nop>
 " ...and in insert mode
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
+inoremap <Left>  <Nop>
+inoremap <Right> <Nop>
+inoremap <Up>    <Nop>
+inoremap <Down>  <Nop>
 
+" edit vimrc file
 nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+" source vimrc file
 nnoremap <Leader>sv :source $MYVIMRC<CR>
-" use jk to exit insert mode
-" inoremap jk <Esc>
-" inoremap <ESC> :echoe "Use jk"<CR>
-
 " that operates on a function name in the current line
-" onoremap <silent> F :<C-U>normal! 0f(hviw<CR>
-
-filetype plugin indent on
+onoremap <silent> F :<C-U>normal! 0f(hviw<CR>
+" operate on current sentence content
+onoremap <silent> s :<C-U>normal! 0v$h<CR>
 
 " window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" go file mapping
+augroup go_mapping
+	autocmd!
+	autocmd FileType go nnoremap <buffer> <Leader>b :GoDebugBreakpoint<CR>
+	" restart coc
+	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
+augroup END
+
+" coc mapping
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" pretty json in place
+nnoremap <silent> <F8> :%!python -m json.tool<CR>
+
+" go debugging mapping
+let g:go_debug_mappings = {
+     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
+     \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
+     \ '(go-debug-step)': {'key': 's'},
+   \}
+
+" NERDTree key mapping
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
+
+" locate current file
+nnoremap <Leader>f :NERDTreeFind<CR>
+
+" CtrlSF setting
+nmap <C-F> <Plug>CtrlSFPrompt
+vmap <C-F> <Plug>CtrlSFVwordPath
+nnoremap <F4> :CtrlSFToggle<CR>
+
+" search selected word in visual mode
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" open a new terminal in vim
+nnoremap <Leader>t :bo term<CR>
+
+" Uppercase in Insert Mode
+inoremap <C-u> <Esc>viwUwi
+
+" toggle tagbar
+nnoremap <silent> <F3> :TagbarToggle<CR>
+" copy the current filepath
+nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
+
+""""""""""""""""""""""""""""""[Key Mapping End]""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""vim-go""""""""""""""""""""""""""""""""""""
 let g:go_highlight_functions = 1
@@ -136,17 +193,6 @@ let g:go_debug_windows = {
       \ 'stack':      'rightbelow 10new',
       \ 'out':      'rightbelow 10new',
 \ }
- let g:go_debug_mappings = {
-     \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
-     \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
-     \ '(go-debug-step)': {'key': 's'},
-   \}
-augroup go_mapping
-	autocmd!
-	autocmd FileType go nnoremap <buffer> <Leader>b :GoDebugBreakpoint<CR>
-	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
-augroup END
-
 
 " let g:go_debug_mappings = {
 " 	\ '(go-debug-continue)':   {'key': '<F5>'},
@@ -159,17 +205,11 @@ augroup END
 " 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <silent> <F8> :%!python -m json.tool<CR>
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
-" key mapping
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -210,11 +250,6 @@ endfunction
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
 
-" NERDTree key mapping
-nnoremap <F2> :NERDTreeToggle<CR>
-
-" locate current file
-nnoremap <Leader>f :NERDTreeFind<CR>
 
 " highlight color setting
 hi FgCocErrorFloatBgCocFloating ctermfg=0
@@ -224,13 +259,7 @@ hi TODO ctermbg=6
 hi DiffText ctermbg=grey
 hi DiffChange ctermbg=grey
 
-" yarn also copy to clipboard
-set clipboard=unnamed
 
-" CtrlSF setting
-nmap <C-F> <Plug>CtrlSFPrompt
-vmap <C-F> <Plug>CtrlSFVwordPath
-nnoremap <F4> :CtrlSFToggle<CR>
 
 let g:ctrlsf_backend = 'ag'
 let g:ctrlsf_position = 'bottom'
@@ -263,17 +292,9 @@ let g:ctrlsf_mapping = {
 " toggle code fold (za, zf for visula model) perhap set a key mapping later
 set foldmethod=manual
 
-" search selected word in visual mode(perhap wanna use someday)
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-" open a new terminal in vim
-nnoremap <Leader>t :bo term<CR>
-
-" Uppercase in Insert Mode
-inoremap <C-u> <Esc>viwUwi
-
-nnoremap <silent> <F3> :TagbarToggle<CR>
-nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
 
 nmap <leader>rn <Plug>(coc-rename)
 let g:mkdp_refresh_slow = 1

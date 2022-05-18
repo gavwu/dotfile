@@ -22,5 +22,12 @@ node --version
 v14.17.0
 ```
 
-NOTE: might need to do `yarn install`
+NOTE: might need to do `yarn install` in the plugin directory
 
+## vim-markdown-preview
+
+```
+call mkdp#util#install()
+```
+
+NOTE: might need to do `yarn install` in the plugin directory
