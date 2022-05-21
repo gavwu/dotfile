@@ -298,3 +298,4 @@ let g:vim_markdown_new_list_item_indent = 0
 
 nmap <leader>rn <Plug>(coc-rename)
 let g:mkdp_refresh_slow = 1
+set ttimeoutlen=0
