@@ -40,3 +40,9 @@
 [submodule "vim/pack/vendor/start/vim-barbaric"]
 	path = vim/pack/vendor/start/vim-barbaric
 	url = https://github.com/rlue/vim-barbaric.git
+[submodule "vim/pack/vendor/start/vim-jsx-pretty"]
+	path = vim/pack/vendor/start/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
+[submodule "vim/pack/vendor/start/typescript-vim"]
+	path = vim/pack/vendor/start/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git

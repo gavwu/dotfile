@@ -1,21 +1,26 @@
 {
+    "coc.preferences.formatOnSaveFiletypes": [
+        "typescriptreact"
+    ],
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
     "coc.source.file.enable": false,
     "languageserver": {
         "golang": {
+            "args": [
+                "-remote=auto"
+            ],
             "command": "gopls",
-	    "args":["-remote=auto"],
             "filetypes": [
                 "go"
             ],
+            "initializationOptions": {},
             "rootPatterns": [
                 "go.mod",
-		".git/"
+                ".git/"
             ],
-	    "initializationOptions":{
-	    },
-	    "trace.server":"verbose"
+            "trace.server": "verbose"
         }
-    }
+    },
+    "typescript.format.enabled": true
 }
