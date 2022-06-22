@@ -162,6 +162,7 @@ nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
 
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 Import :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 
 """"""""""""""""""""""""""""""[Key Mapping End]""""""""""""""""""""""""""""""
 
@@ -295,10 +296,17 @@ let g:ctrlsf_mapping = {
 " toggle code fold (za, zf for visula model) perhap set a key mapping later
 set foldmethod=manual
 
-
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 nmap <leader>rn <Plug>(coc-rename)
 let g:mkdp_refresh_slow = 1
 set ttimeoutlen=0
+
+" ALE
+let g:ale_disable_lsp = 1
+let g:ale_linters = {
+\  'go': ['golangci-lint'],
+\}
+let g:ale_go_golangci_lint_options = '--skip-dirs="vendor|bin" --skip-files "_test\.go" --exclude unused,sa1012,asmdecl,S1004,SA5008,SA1029'
+let g:ale_linters_explicit = 1

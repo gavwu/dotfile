@@ -5,6 +5,8 @@
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
     "coc.source.file.enable": false,
+    "diagnostic.displayByAle": true,
+    "diagnostic.enable": true,
     "languageserver": {
         "golang": {
             "args": [
@@ -23,6 +25,5 @@
         }
     },
     "prettier.singleQuote": true,
-    "typescript.format.enabled": true,
-    "diagnostic.enable": false
+    "typescript.format.enabled": true
 }

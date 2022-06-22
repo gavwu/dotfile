@@ -49,3 +49,6 @@
 [submodule "vim/pack/vendor/start/gotests-vim"]
 	path = vim/pack/vendor/start/gotests-vim
 	url = https://github.com/buoto/gotests-vim.git
+[submodule "vim/pack/vendor/start/ale"]
+	path = vim/pack/vendor/start/ale
+	url = https://github.com/dense-analysis/ale.git
