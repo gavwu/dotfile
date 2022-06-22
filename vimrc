@@ -160,6 +160,9 @@ nnoremap <silent> <F3> :TagbarToggle<CR>
 " copy the current filepath
 nnoremap <silent> <Leader>y :let @+=expand('%') . ':' . line(".")<CR>
 
+command! -nargs=0 Format :call CocActionAsync('format')
+command! -nargs=0 Import :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+
 """"""""""""""""""""""""""""""[Key Mapping End]""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""vim-go""""""""""""""""""""""""""""""""""""

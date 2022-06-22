@@ -22,5 +22,7 @@
             "trace.server": "verbose"
         }
     },
-    "typescript.format.enabled": true
+    "prettier.singleQuote": true,
+    "typescript.format.enabled": true,
+    "diagnostic.enable": false
 }
