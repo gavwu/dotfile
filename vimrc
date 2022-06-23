@@ -74,6 +74,9 @@ filetype plugin indent on
 
 " yarn also copy to clipboard
 set clipboard=unnamed
+
+set exrc
+set secure
 """"""""""""""""""""""""""""""[Basic Setting End]""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""[Key Mapping]""""""""""""""""""""""""""""""
@@ -251,6 +254,12 @@ function! s:show_documentation()
   endif
 endfunction
 
+let g:coc_global_extensions = [
+      \'coc-json',
+      \'coc-prettier',
+      \'coc-marketplace',
+      \'coc-tsserver',
+\]
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
 
@@ -309,4 +318,11 @@ let g:ale_linters = {
 \  'go': ['golangci-lint'],
 \}
 let g:ale_go_golangci_lint_options = '--skip-dirs="vendor|bin" --skip-files "_test\.go" --exclude unused,sa1012,asmdecl,S1004,SA5008,SA1029'
-let g:ale_linters_explicit = 1
+let g:ale_go_golangci_lint_package = 1
+" let g:ale_linters_explicit = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
