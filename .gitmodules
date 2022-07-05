@@ -52,3 +52,6 @@
 [submodule "vim/pack/vendor/start/ale"]
 	path = vim/pack/vendor/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/pack/vendor/start/vimspector"]
+	path = vim/pack/vendor/start/vimspector
+	url = https://github.com/puremourning/vimspector

@@ -1,6 +1,8 @@
 """"""""""""""""""""""""""""""[Baisc Setting]""""""""""""""""""""""""""""""
 " Comments in Vimscript start with a `"`.
 
+" set t_u7=
+
 " If you open this file in Vim, it'll be syntax highlighted for you.
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
@@ -274,6 +276,7 @@ hi DiffChange ctermbg=grey
 
 
 
+" CTRLSF Configuration
 let g:ctrlsf_backend = 'ag'
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_auto_focus = {
@@ -312,12 +315,13 @@ nmap <leader>rn <Plug>(coc-rename)
 let g:mkdp_refresh_slow = 1
 set ttimeoutlen=0
 
-" ALE
+" ALE Configuration
 let g:ale_disable_lsp = 1
 let g:ale_linters = {
 \  'go': ['golangci-lint'],
 \}
 let g:ale_go_golangci_lint_options = '--skip-dirs="vendor|bin" --skip-files "_test\.go" --exclude unused,sa1012,asmdecl,S1004,SA5008,SA1029'
+" golangci-lint have to compile the package to make lint
 let g:ale_go_golangci_lint_package = 1
 " let g:ale_linters_explicit = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -326,3 +330,6 @@ let g:ale_lint_on_save = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Vimspector Configuration
+let g:vimspector_enable_mappings = 'HUMAN'
