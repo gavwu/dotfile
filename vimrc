@@ -119,7 +119,7 @@ nnoremap <C-l> <C-w>l
 " go file mapping
 augroup go_mapping
 	autocmd!
-	autocmd FileType go nnoremap <buffer> <Leader>b :GoDebugBreakpoint<CR>
+	autocmd FileType go nnoremap <buffer> <Leader>b <Plug>VimspectorToggleBreakpoint
 	" restart coc
 	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
 augroup END
@@ -331,5 +331,65 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-" Vimspector Configuration
-let g:vimspector_enable_mappings = 'HUMAN'
+""""""""""""""""""""Vimspector Configuration""""""""""""""""""""
+
+command! DebugContinue :call vimspector#Continue()
+command! DebugNext :call vimspector#StepOver()
+command! DebugStepIn :call vimspector#StepInto()
+command! DebugStepOut :call vimspector#StepOut()
+command! DebugPause :call vimspector#Pause()
+command! DebugStop :call vimspector#Stop()
+command! DebugRestart :call vimspector#Restart()
+command! DebugReset :call vimspector#Reset()
+command! DebugToggleBP :call vimspector#ToggleBreakpoint()
+command! DebugListBP :call vimspector#ListBreakpoints()
+let s:mapped = {}
+function! s:OnJumpToFrame() abort
+  if has_key( s:mapped, string( bufnr() ) )
+    return
+  endif
+
+  nmap <silent> <buffer> n <Plug>VimspectorStepOver
+  nmap <silent> <buffer> c <Plug>VimspectorContinue
+
+  let s:mapped[ string( bufnr() ) ] = { 'modifiable': &modifiable }
+
+  setlocal nomodifiable
+
+endfunction
+function! s:OnDebugEnd() abort
+
+  let original_buf = bufnr()
+  let hidden = &hidden
+  augroup VimspectorSwapExists
+    au!
+    autocmd SwapExists * let v:swapchoice='o'
+  augroup END
+
+  try
+    set hidden
+    for bufnr in keys( s:mapped )
+      try
+        execute 'buffer' bufnr
+        silent! nunmap <buffer> n
+        silent! nunmap <buffer> c
+
+        let &l:modifiable = s:mapped[ bufnr ][ 'modifiable' ]
+      endtry
+    endfor
+  finally
+    execute 'noautocmd buffer' original_buf
+    let &hidden = hidden
+  endtry
+
+  au! VimspectorSwapExists
+
+  let s:mapped = {}
+endfunction
+augroup debug_mappings
+	autocmd!
+	autocmd User VimspectorJumpedToFrame call s:OnJumpToFrame()
+	autocmd User VimspectorDebugEnded ++nested call s:OnDebugEnd()
+augroup END
+
+""""""""""""""""""""Vimspector Configuration""""""""""""""""""""
