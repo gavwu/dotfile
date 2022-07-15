@@ -261,6 +261,7 @@ let g:coc_global_extensions = [
       \'coc-prettier',
       \'coc-marketplace',
       \'coc-tsserver',
+      \'coc-pyright',
 \]
 
 """""""""""""""""""""""""coc-nvim"""""""""""""""""""""""""
