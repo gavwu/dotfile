@@ -122,6 +122,7 @@ augroup go_mapping
 	autocmd FileType go nnoremap <buffer> <Leader>b <Plug>VimspectorToggleBreakpoint
 	" restart coc
 	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
+	autocmd FileType go nnoremap <Leader>gt :GoTest -gcflags=-l<CR>
 augroup END
 
 " coc mapping
