@@ -123,6 +123,7 @@ augroup go_mapping
 	" restart coc
 	autocmd FileType go nnoremap <Leader>R :!go mod tidy<CR>:CocRestart<CR>
 	autocmd FileType go nnoremap <Leader>gt :GoTest -gcflags=-l<CR>
+	autocmd FileType go nnoremap <Leader>gg :GoGenerate<CR>
 augroup END
 
 " coc mapping
@@ -276,7 +277,8 @@ hi TODO ctermbg=6
 hi DiffText ctermbg=grey
 hi DiffChange ctermbg=grey
 
-
+" CTRLP Configuration
+let g:ctrlp_custom_ignore = 'vendor'
 
 " CTRLSF Configuration
 let g:ctrlsf_backend = 'ag'
@@ -285,7 +287,7 @@ let g:ctrlsf_auto_focus = {
 	\ "at" : "start",
 	\ }
 let g:ctrlsf_search_mode = 'async'
-let g:ctrlsf_ignore_dir = ['.git']
+let g:ctrlsf_ignore_dir = ['.git', 'vendor']
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_mapping = {
 		\ "open"    : ["<CR>", "o"],
